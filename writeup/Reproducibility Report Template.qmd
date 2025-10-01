@@ -1,6 +1,6 @@
 ---
-title: "Reproducibility Report for Study X by Sample & Sample (20xx, Psychological Science)"
-author: "Reproducibility Project Author[s] (contact information)"
+title: "Reproducibility Report for 'A dual-pathway architecture for stress to disrupt agency and promote habit' by Giovanniello et al. (2025, Nature)"
+author: "Tristan David"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
