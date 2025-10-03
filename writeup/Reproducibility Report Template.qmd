@@ -12,7 +12,17 @@ format:
 
 ## Introduction
 
-The experiment I will simulate and reproduce comes from a paper investigating how different nuclei of the amygdala, and their projections to the striatum, support either action-outcome learning or habit formation and its disruption by stress. Chronic, mild stress causes perturbations to these brain regions which can render a mouse unable to employ volitional control over decision-making as evidenced by two gold standard assessments of goal-directed behavior: outcome-devaluation and contingency degradation. The experiments described by this paper are important for questions I want to investigate in my research program because it is one of a few papers examining the projections of CeA-DMS. The DMS is a nucleus within the basal ganglia that has a role in the acquisition of goal-directed behavior that supports adaptive decision-making. The CeA is a nucleus within the amygdalar complex that has become a popular region to investigate its role in incentive motivation. These regions, when investigated on their own, are compromised in disease states such as ethanol dependence and investigating amygdalar-striatal afferents will provide knowledge on neural dysfunction of motivational and cognitive control over decision-making.  
+[No abstract is needed.]  Each reproducibility project will have a straightforward, no frills report of the study and reproducibility results. These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of your attempt to reproduce the results. Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for your reproducibility attempt, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
+
+The experiment I will simulate and reproduce comes from a paper investigating how distinct nuclei of the amygdala, and their projections to the striatum, support either action-outcome learning or habit formation and the disruption of these processes by stress. Chronic, mild stress perturbs these brain regions, impairing a mouse’s ability to exert volitional control over decision-making, as measured by two gold-standard assessments of goal-directed behavior: outcome-devaluation and contingency degradation. The experiments described by this paper are important for my research program because it is one of a few studies examining CeA-DMS projections. The DMS is a nucleus within the basal ganglia that has a role in the acquisition of goal-directed behavior that supports adaptive decision-making. The CeA is a nucleus within the amygdalar complex that has become a focal point of research on incentive salience. These regions, when investigated on their own, are compromised in disease states such as ethanol dependence, and investigating amygdalar-striatal afferents will provide knowledge on neural dysfunction of disrupted motivational and cognitive control over decision-making.
+
+In order to simulate this experiment, I will look over the available behavioral data from the paper and record the means and variabilities for individual aspects (mouse, session, rate). These metrics will be important for how I will want to simulate datasets. 
+
+The statistical analyses for the data will include multiple ANOVAs and t-tests to evaluate performance across instrumental tasks and outcome devaluation assessments. A challenge in simulation is capturing the variability of animal behavior, since performance will change across sessions and response acquisition will differ between animals.
+
+For a more difficult type of analysis, I can opt to simulate and analyze calcium fluorescence signals via fiber photometry recordings. There are many challenges with attempting to analyze this type of data. We need to think about how that data was preprocessed- whether the data available is preprocessed or raw data, and we would need to simulate these deltaF/F traces, z-scored across sessions and aligned with behavioral timestamps. We would also worry about how we want to accurately model noise for the data. I likely will not decide to do this option.
+
+https://github.com/tristantd/giovannielloetal2025.git
 
 **Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
 
@@ -34,7 +44,7 @@ Original paper (as hosted in your repo):
 
 ### Description of the steps required to reproduce the results
 
-Please describe all the steps necessary to reproduce the key result(s) of this study. 
+Please describe all the steps necessary to reproduce the key result(s) of this study.
 
 ### Differences from original study
 
