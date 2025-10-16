@@ -18,9 +18,9 @@ The experiment I will simulate and reproduce comes from a paper investigating ho
 
 In order to simulate this experiment, I will look over the available behavioral data from the paper and record the means and variabilities for individual aspects (mouse, session, rate). These metrics will be important for how I will want to simulate datasets. 
 
-The statistical analyses for the data will include multiple ANOVAs and t-tests to evaluate performance across instrumental tasks and outcome devaluation assessments. A challenge in simulation is capturing the variability of animal behavior, since performance will change across sessions and response acquisition will differ between animals.
+The statistical analyses for the data will include multiple ANOVAs and t-tests to evaluate the effects of stress on performance across instrumental tasks and outcome devaluation assessments, as well as the neural mechanisms contributing to the shift, or rescue, of action control. A challenge in simulation is capturing the variability of animal behavior, since performance will change across sessions and response acquisition will differ between animals.
 
-For a more difficult type of analysis, I can opt to simulate and analyze calcium fluorescence signals via fiber photometry recordings. There are many challenges with attempting to analyze this type of data. We need to think about how that data was preprocessed- whether the data available is preprocessed or raw data, and we would need to simulate these deltaF/F traces, z-scored across sessions and aligned with behavioral timestamps. We would also worry about how we want to accurately model noise for the data. I likely will not decide to do this option.
+Prior to running simulations, I will attempt to reproduce the analyses reported in the paper using the available data. The authors used a statistical analysis software called Prism on all quantitative data. I will use a different analysis software called JASP since it is free. I will only focus on reproducing the experiments that I intend to simulate– the effects of stress and the effects of neural circuit manipulation on the shift in action control strategies. Specifically, I will reproduce and simulate effects of CeA-DMS inhibition and BLA-DMS activation on behavior in stress mice.
 
 https://github.com/tristantd/giovannielloetal2025.git
 
