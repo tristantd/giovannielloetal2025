@@ -108,6 +108,178 @@ Data preparation following the analysis plan.
 ```
 
 ```{python}
+# Reproduce original data here
+
+# IMPORTS
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+from statsmodels.stats.anova import AnovaRM, anova_lm
+from statsmodels.formula.api import ols
+import pingouin as pg
+
+# Figure 1h DATA LOADING
+data_1h = pd.read_csv('1h.csv')
+
+data_1h = data_1h.rename(columns={'Subject ID': 'Subject_ID', 
+                                  'Previous Experience': 'Stress'}) # Renaming to avoid spaces in column names
+
+
+df_1h = data_1h.melt( # put into a df
+    id_vars=['Subject_ID', 'Group', 'Stress'], 
+    value_vars=['Day 1', 'Day 2', 'Day 3', 'Day 4'],
+    var_name='Day',
+    value_name='PressRate'
+)
+
+df_1h['Day'] = df_1h['Day'].str.replace("Day ", "").astype(int)
+df_1h['Group'] = df_1h['Group'].astype('category')
+
+print(df_1h.head(28))
+
+pg.mixed_anova(
+    data=df_1h,
+    dv='PressRate',
+    within='Day',
+    between='Group',
+    subject='Subject_ID'
+)
+
+
+# Plot for Figure 1h
+
+plt.figure()
+
+# Individual mouse lines
+
+ind_mouse_line = sns.lineplot( 
+    data=df_1h,
+    x='Day',
+    y='PressRate',
+    hue='Group',
+    estimator=None,
+    units='Subject_ID',
+    lw=0.7,
+    alpha=0.35,
+    legend=False     
+)
+
+# Main lines
+main_group = sns.lineplot(
+    data=df_1h,
+    x='Day',
+    y='PressRate',
+    hue='Group',
+    errorbar='se',
+    lw=2.5,
+    marker='o'
+)
+
+plt.title('Figure 1h Reproduction')
+plt.xlabel('Day')
+plt.xticks([1, 2, 3, 4])
+plt.yticks(range(0, 35, 5))
+plt.ylabel('Press Rate')
+plt.show()
+
+
+# Figure 1h STATISTICAL ANALYSIS
+
+rmanova = pg.mixed_anova(
+    dv='PressRate',
+    within='Day',
+    between='Group',
+    subject='Subject_ID',
+    data=df_1h
+)
+
+print(rmanova)
+
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+# Fit the model
+model = ols('PressRate ~ C(Day) * C(Group)', data=df_1h).fit()
+
+# Type III SS (like SPSS/JAMOVI/JASP)
+rmanova = sm.stats.anova_lm(model, typ=3)
+
+print(rmanova)
+
+# Figure 1i DATA LOADING
+
+data_1i = pd.read_csv('1i.csv')
+
+data_1i = data_1i.rename(columns={'Subject ID': 'Subject_ID', 'Press Rate': 'Press_Rate'}) # Rename columns
+
+data_1i = data_1i.rename(columns={'Previous Experience': 'Previous_Experience'})
+
+
+data_1i['Group'] = data_1i['Group'].astype('category')
+
+data_1i['Previous_Experience'] = data_1i['Previous_Experience'].astype('category')
+
+print(data_1i.head(30))
+
+#Fixing Figure 1i ANOVA DATA LOADING
+
+data_1i_anova = pd.read_csv('1i_anova.csv')
+
+data_1i_anova = data_1i_anova.rename(columns={'Subject ID': 'Subject_ID', 'Press Rate': 'Press_Rate'}) # Rename columns
+
+data_1i_anova = data_1i_anova.rename(columns={'Previous Experience': 'Previous_Experience'})
+
+
+data_1i_anova['Group'] = data_1i_anova['Group'].astype('category')
+
+data_1i_anova['Previous_Experience'] = data_1i_anova['Previous_Experience'].astype('category')
+
+print(data_1i_anova.head(30))
+
+# Plot for Figure 1i
+
+plt.figure(figsize=(10,10)) #make figure bigger
+
+# Bar plot: mean ± SE
+sns.barplot(
+    data=data_1i,
+    x='Group',
+    y='Press_Rate',
+    errorbar=('se'),          # standard error
+    capsize=0.1,
+    color='skyblue'
+)
+
+# Individual values
+sns.stripplot(
+    data=data_1i,
+    x='Group',
+    y='Press_Rate',
+    jitter=True,
+    color='gray',     # lighter color for individual points
+    alpha=0.6,
+    size=6
+)
+
+plt.title('Figure 1i Reproduction')
+plt.xlabel('Group')
+plt.ylabel('Press Rate')
+plt.yticks(range(0, 35, 5))
+plt.show()
+
+# Figure 1i two way anova
+
+anova = pg.anova(
+    data=data_1i_anova,
+    dv='Press_Rate',
+    between=['Previous_Experience', 'Group']
+)
+
+print(anova)
+
 # Simulation Code Here
 
 # Simulate Figure 1h and 1i from Giovanniello et al. (Nature, 2025)
@@ -303,8 +475,12 @@ print(deg_anova)
 
 The analyses as specified in the analysis plan.  
 
+Analyses for reproduced original data and simulation data are in code block above. We cannot input only the analyses and figures here because they require all lines of code (e.g., imports, csv, etc).
+
 *Side-by-side graph with original graph is ideal here*
 
+
+    
 ### Exploratory analyses
 
 Any follow-up analyses desired (not required).  
