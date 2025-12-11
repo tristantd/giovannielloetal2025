@@ -1,11 +1,12 @@
 ---
 title: "Reproducibility Report for 'A dual-pathway architecture for stress to disrupt agency and promote habit' by Giovanniello et al. (2025, Nature)"
 author: "Tristan David"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: "December 10, 2025"
 format:
   html:
     toc: true
     toc_depth: 3
+jupyter: python3
 ---
 
 <!-- Reproducibility reports should all use this template to standardize reporting across projects. These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
@@ -14,39 +15,33 @@ format:
 
 [No abstract is needed.]  Each reproducibility project will have a straightforward, no frills report of the study and reproducibility results. These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of your attempt to reproduce the results. Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for your reproducibility attempt, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
 
-The experiment I will simulate and reproduce comes from Giovaniello et al. (2025), which investigates how distinct nuclei of the amygdala and their projections to the striatum support supoprt goal-directed vs habitual behavior, and the disruption of these processes by chronic stress. Chronic, mild stress perturbs these brain regions, impairing a mouse’s ability to exert volitional control over actions, as measured by two gold-standard assessments of goal-directed behavior: outcome-devaluation and contingency degradation. 
+Giovanniello et al. (2025) investigated the neural mechanisms by which chronic stress disrupts agency learning to potentiate habit formation. In particular, the researchers investigated how distinct nuclei of the amygdala and their projections to the dorsal medial striatum support goal-directed vs habitual behavior, and the disruption of these processes by chronic stress. Chronic, mild stress perturbs these brain regions, rendering a mouse unable to exert volitional control over actions, as measured by two gold-standard assessments of goal-directed behavior: outcome devaluation and contingency degradation.
 
-The focus of my reproducibility report is to reproduce and simulate the authors' core argument that chronic stress disrupts goal-directed action and promotes habits, as indexed by insensitivity to contingency degradation. This behavioral finding is reflects a stress x contingency degradation group interaction on lever press rates.
-
-The experiments described by this paper are important for my research program because it converges with my interest in circuit-specific mechanisms underlying disrupted behavioral control in models of alcohol dependence. Specifically, the finding of the existence and a functional role for CeA-DMS afferents really resonates with my research interests. The DMS is a nucleus within the basal ganglia that has a role in the acquisition of goal-directed behavior that supports adaptive decision-making. The CeA is a nucleus within the amygdalar complex that has become a focal point of research on incentive salience. These regions, when investigated on their own, are compromised in disease states such as ethanol dependence, and investigating amygdalar-striatal afferents will provide knowledge on neural mechanisms of disrupted motivational and cognitive control over decision-making.
-
-In order to simulate this experiment, I will look over the available behavioral data from the paper and record the means and variabilities for individual aspects (mouse, session, rate). These metrics will be important for how I will want to simulate datasets. 
-
-The main statistical analysis I will use to reproduce and simulate the main finding is a two-way ANOVA with stress and contingency degradation groups as factors. Lever-press rate during the contingency degradation probe test is what we will use as our measure. A challenge in simulation is capturing the variability of animal behavior, since performance will change across sessions and response acquisition will differ between animals.
-
-Prior to running simulations, I will attempt to reproduce the analyses reported in the paper using the available data. The authors used a statistical analysis software called Prism on all quantitative data. I will use a different analysis software called JASP since it is free. I will only focus on reproducing the experiment that I intend to simulate– the effects of chronic stress on goal-directed action control.
-
-https://github.com/tristantd/giovannielloetal2025.git
+The focus of this report is to reproduce and simulate data to assess the authors’ core argument that stress disrupts goal-directed action and promotes habits, as indexed by insensitivity to contingency degradation. This behavioral finding is reflected by a Stress x Contingency degradation group interaction on lever press rates.
 
 **Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
+
+The main statistical analysis I will use to reproduce and simulate the main finding is a two-way ANOVA with stress and contingency degradation groups as factors. Lever-press rate during the contingency degradation probe test is what we will use as our measure.
 
 ### Justification for choice of study
 
 Please describe why you chose to reproduce the results of this study.
 
-I am choosing to reproduce the results of this study because a crucial component for my research program is evaluating disruptions to behavioral control strategies in disease models--specifically, alcohol dependence. This study looks at the effects of chronic stress, while I want to investigate effects of chronic ethanol exposure. Additionally, this paper evaluates the contributions of distinct amygdalar-striatal circuitry in supporting goal-directed actions or enabling habit formation. I am interested in the role of amygdalar-circuitry in the context of incentive motivation. While this study looks at differnt roles of this pathway, it is only one of a few showing existence of CeA to dorsomedial straital afferents and a functional role. 
+The researchers demonstrate the existence of and functional role for CeA-DMS afferents, a circuit I hope to investigate in the context of alcohol-induced aberrant motivational control over behavior. The DMS is a nucleus within the basal ganglia that has a role in the acquisition of goal-directed behavior that supports adaptive decision-making. The CeA is a nucleus within the amygdalar complex that has become a focal point of research on incentive salience. These regions, when investigated on their own, are compromised in disease states such as ethanol dependence, and investigating amygdalar-striatal afferents will provide knowledge on neural mechanisms of disrupted motivational and cognitive control over decision-making.
 
 ### Anticipated challenges
 
 Do you anticipate running into any challenges when attempting to reproduce these result(s)? If so please, list them here.
 
-I anticipate that capturing the natural variability of animal behavior will be difficult in simulation. I also think that because I will be using a different statistical analysis software, there will be differences in how the effects and statistics are reported. There are many experiments described in this paper. So one challenge is attempting to reproduce and then simulate all those experiments. Therefore, I will only focus on one: the effects of chronic stress on a contingency degredation probe test.
+A challenge in simulation is capturing the natural variability of animal behavior since performance will follow a normal distribution guided by the means. Therefore, with simulations we lose entropy. The authors use a statistical analysis software called GraphPad Prism. For the purposes of the course and this report, I will use Python packages to reproduce and analyze simulated data. This difference in analysis platforms will yield different values, but should be somewhat similar. There are also many experiments described in this paper. Therefore, I will only focus on one: the effects of chronic stress on a contingency degradation probe test.
 
 ### Links
 
 Project repository (on Github): https://github.com/tristantd/giovannielloetal2025.git
 
-Original paper (as hosted in your repo): https://www.nature.com/articles/s41586-024-08580-w
+Original paper (as hosted in your repo): https://github.com/psyc-201/giovannielloetal2025/tree/main/original_paper
+
+Link to Pre-Registration: https://osf.io/registries/drafts/691e0a9f9ef45ebbd997c92b/review
 
 ## Methods
 
@@ -54,19 +49,32 @@ Original paper (as hosted in your repo): https://www.nature.com/articles/s41586-
 
 Please describe all the steps necessary to reproduce the key result(s) of this study.
 
-To evaluate the effects of chronic stress on goal-directed actions, I will simulate behavioral data for 29 mice (7 mice for the control, non-degraded group; 7 mice for the control, degraded group; 7 mice for the stress, non-degraded group; and 8 mice for the stress, degraded group). The primary confirmatory analysis will be a stress x contingency degradation group interaction, effect of contingency degradation, and no effect of stress.
+1. Identify key behavior measure of the experiment to reproduce
+    Assess effects of chronic stress on action-outcome learning using lever press rate during degraded and non-degraded contingencies.
+2. Extract descriptive stats for each mouse in each group (press rates during degradation test)
+    I will use available data included with the published paper to reproduce key statistics on Python.
+3. Reanalyze using two-way ANOVA, Stress x Contingency degradation group
+    The primary confirmatory analysis will be a Stress x Contingency degradation group interaction. We should also see an effect of contingency degradation and no effect of stress. This corresponds to figure 1i of the original paper.
+4. Compare reproduced result to original reported values (F statistic, p-values, effect sizes)
 
-The hypothesis I want to confirm is that chronic stress will reduce sensitivity to the action-outcome contingency (as evidenced by no reduction in lever press rate when contingency is degraded) which should produce a significant stress x contingency degradation group interaction where we would observe stress mice press equally in degraded and non-degraded conditions, whereas we would observe a reduced lever pressing in the degraded condition for control mice. This corresponds to figure 1i.
+### Description of the steps required to simulate and analyze simulated dataset
 
-The parameter estimates we will use are means, SDs, SEMs, p-values. 
+The hypothesis I want to confirm is that chronic stress will reduce sensitivity to the action-outcome contingency. This would suggest stress mice have disrupted goal-directed control. To evaluate the effects of chronic stress on goal-directed actions, I will simulate behavioral data for 29 mice (7 control, non-degraded; 7 control, degraded; 7 stress, non-degraded; and 8 stress, degraded). These are the exact sample sizes for each group reported in the original paper. 
 
-I will use a 2(control vs chronic stress) X 2(degraded vs nondegraded)
+The parameter estimates I will use are the means, SDs, SEMs for each mouse’s press rates. Data simulation follows a normal distribution. The design is a 2 (control vs stress) x 2 (degraded vs nondegraded) between subjects ANOVA.
 
+1. Use the original group means and SDs to parameterize the simulated data.
+2. Generate simulated behavioral data from a normal distribution for each group.
+3. Run the same statistical test as original authors, two-way ANOVA on press rate.
+4. Visualization + Interpretation
+    Create a bar graph comparing original and simulated findings side-by-side. Confirm whether the simulated data reproduce insensitivity to contingency degradation in stress mice.
+
+ 
 ### Differences from original study
 
 Explicitly describe known differences in the analysis pipeline between the original paper and yours (e.g., computing environment). The goal, of course, is to minimize those differences, but differences may occur. Also, note whether such differences are anticipated to influence your ability to reproduce the original results.
 
-The differences from the original study are that this will be a simulation by which no behavioral data will be collected. Additionally, I will use a different statistical analysis software that the paper uses--they use Prism GraphPad and I will use JASP because it is free. I will use the same analysis, two-way ANOVA, for the simulated data. These differences will potentially influence my ability to reproduce the original results. For example, the differerent statistical analysis softwares may result in different reported values.
+The differences from the original study are that this will be a simulation by which no behavioral data will be collected. Additionally, this paper uses a statistical analysis software called GraphPad Prism. For the purposes of this course, I will reproduce and simulate, as well as analyze the data using Python. I will use the same analysis, two-way ANOVA, for the simulated data. These differences will potentially influence my ability to reproduce the original results. For example, the different statistical analysis softwares may result in different reported values.
 
 ## Project Progress Check 1
 
@@ -74,14 +82,11 @@ The differences from the original study are that this will be a simulation by wh
 
 Please describe the outcome measure for the success or failure of your reproduction and how this outcome will be computed.
 
-The outcome measure for the success of this reproducibility project will be if I can show the same effect that the authors claim in their paper. This will be comparing my simulated data with the authors' real reported data. This will be computed using an ANOVA on the simulated data and comparing effect sizes. 
+The outcome measure for the success of this reproducibility project will be if I can show the same effect that the authors claim in their paper (Stress x Contingency degradation group interaction). This will be comparing my simulated data with the authors' real reported data. This will be computed using an ANOVA on the simulated data and comparing effect sizes. 
 
 ### Pipeline progress
 
 Earlier in this report, you described the steps necessary to reproduce the key result(s) of this study. Please describe your progress on each of these steps (e.g., data preprocessing, model fitting, model evaluation).
-
-I have now reproduced the statistics reported in the original paper. I have also made simulation code that simulates press rate based on the means and standard deviations of the groups. I need to figure out how to get the raw numbers from this data frame so that I can put it into an excel sheet and analyze/do statistical tests on JASP.
-
 
 ## Results
 
@@ -89,7 +94,7 @@ I have now reproduced the statistics reported in the original paper. I have also
 
 Data preparation following the analysis plan.
 	
-```{r include=F}
+```{python}
 ### Data Preparation
 
 #### Load Relevant Libraries and Functions
@@ -99,6 +104,199 @@ Data preparation following the analysis plan.
 #### Data exclusion / filtering
 
 #### Prepare data for analysis - create columns etc.
+
+```
+
+```{python}
+# Simulation Code Here
+
+# Simulate Figure 1h and 1i from Giovanniello et al. (Nature, 2025)
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pingouin as pg
+import statsmodels.formula.api as smf
+
+# Set random seed
+np.random.seed(50)
+
+# PARAMETERS / MOUSE GROUPS AND SESSION
+
+n_mice = {
+    'control_non_deg': 7, # 7 mice in control, non-degraded group
+    'control_deg': 7, # 7 mice in control, degraded group
+    'stress_non_deg': 7, # 7 mice in stress, non-degraded group
+    'stress_deg': 8 # 8 mice in stress, degraded group
+}
+sessions = np.arange(1, 5) # 4 training sessions
+
+print(n_mice)
+print(sessions)
+
+# Group means ± SDs from paper
+
+training_data = { # these are training session means and SDs from the paper's raw data, I got these numbers from uploading
+                  # the raw data onto JASP
+    1: {'control_deg': (2.140, 0.619), # Day 1 mean and SD for control, degraded group from paper raw data
+        'control_non_deg': (1.630, 0.755), # Day 1 mean and SD for control, non-degraded group from paper raw data
+        'stress_deg': (2.235, 0.666), # Day 1 mean and SD for stress, degraded group from paper raw data
+        'stress_non_deg': (2.626, 1.056)}, # Day 1 mean and SD for stress, non-degraded group from paper raw data
+    2: {'control_deg': (5.727, 2.088), # Day 2 mean and SD for control, degraded group from paper raw data
+        'control_non_deg': (6.240, 3.677), # Day 2 mean and SD for control, non-degraded group from paper raw data
+        'stress_deg': (4.484, 2.296), # Day 2 mean and SD for stress, degraded group from paper raw data
+        'stress_non_deg': (4.899, 2.223)}, # Day 2 mean and SD for stress, non-degraded group from paper raw data
+    3: {'control_deg': (10.28, 2.460), # Day 3 mean and SD for control, degraded group from paper raw data
+        'control_non_deg': (9.104, 2.770), # Day 3 mean and SD for control, non-degraded group from paper raw data
+        'stress_deg': (10.20, 2.811), # Day 3 mean and SD for stress, degraded group from paper raw data
+        'stress_non_deg': (10.98, 3.392)}, # Day 3 mean and SD for stress, non-degraded group from paper raw data
+    4: {'control_deg': (15.37, 2.336), # Day 4 mean and SD for control, degraded group from paper raw data
+        'control_non_deg': (16.69, 5.146), # Day 4 mean and SD for control, non-degraded group from paper raw data
+        'stress_deg': (14.98, 4.992), # Day 4 mean and SD for stress, degraded group from paper raw data
+        'stress_non_deg': (17.38, 6.069)} # Day 4 mean and SD for stress, non-degraded group from paper raw data
+}
+
+degradation_data = { # these are degradation session means and SDs from the paper's raw data, I got these numbers from       
+                     # uploading the raw data onto JASP
+    'Control Non-degraded': {'mean': 15.371, 'sd': 5.401, 'n': 7}, 
+    'Control Degraded': {'mean': 3.486, 'sd': 1.852, 'n': 7}, 
+    'Stress Non-degraded': {'mean': 12.225, 'sd': 5.537, 'n': 7}, 
+    'Stress Degraded': {'mean': 11.714, 'sd': 4.730, 'n': 8}
+}
+
+# SIMULATE TRAINING DATA (Fig. 1h)
+# From the means ± SDs
+
+training_sim = [] # to hold training data from simulation
+
+# Create stable subject IDs
+subjects_by_group = {
+    group: [f"{group}_{i}" for i in range(n)]
+    for group, n in n_mice.items()
+}
+
+for session, vals in training_data.items():
+    for group, (mean, sd) in vals.items():
+        subjects = subjects_by_group[group]
+        # Simulate press rates
+        rates = np.random.normal(mean, sd, len(subjects))
+        # Remove negative values (press rates can't be negative)
+        rates = np.clip(rates, 0, None)
+        
+        stress = 'Control' if 'control' in group else 'Stress'
+        contingency = 'Degraded' if ('deg' in group and 'non' not in group) else 'Non-degraded'
+        
+        for subj, rate in zip(subjects, rates):
+            training_sim.append({
+                'Session': session,
+                'Subject': subj,
+                'PressRate': rate,
+                'Stress': stress,
+                'Contingency': contingency
+            })
+
+training_df = pd.DataFrame(training_sim)
+print(training_df.head(40))
+
+# Save training data to CSV
+training_df.to_csv('output.csv', index=False)
+
+# PLOT SIMULATED TRAINING DATA
+
+plt.figure(figsize=(8, 6))
+sns.lineplot(
+    data=training_df,
+    x='Session', y='PressRate',
+    hue='Stress', style='Contingency',
+    markers=True, errorbar=('se'),
+)
+
+plt.title("Instrumental Training")
+plt.xticks([1, 2, 3, 4])
+plt.yticks([0, 2, 4, 6, 8, 10, 12, 14, 16, 18])
+plt.ylabel("Presses per Minute")
+plt.show()
+
+
+# REPEATED MEASURES ANOVA for Training Data
+# Mixed ANOVA with Session as within-subjects factor and Stress/Contingency as between-subjects factors
+
+# Create a combined Group factor for mixed_anova (which only supports one between factor)
+training_df['Group'] = training_df['Stress'] + ' ' + training_df['Contingency']
+
+anova = pg.mixed_anova(
+    dv='PressRate',
+    within='Session',
+    between='Group',
+    subject='Subject',
+    data=training_df
+)
+
+print(anova)
+
+# SIMULATE CONTINGENCY DEGRADATION DATA (Fig. 1i)
+# From real means ± SDs
+
+degradation_sim = [] # to hold lever press degradation data from simulation
+
+for group, params in degradation_data.items(): 
+    mean, sd, n = params['mean'], params['sd'], params['n'] 
+    rates = np.random.normal(mean, sd, n) # simulate press rates for degradation groups
+    # Remove negative values
+    rates = np.clip(rates, 0, None)
+    
+    stress = 'Control' if 'Control' in group else 'Stress' 
+    contingency = 'Degraded' if 'Degraded' in group else 'Non-degraded'
+    
+    for i, r in enumerate(rates):
+        degradation_sim.append({
+            'Subject': f"{group.replace(' ', '_')}_{i}",
+            'Group': group,
+            'Stress': stress,
+            'Contingency': contingency,
+            'PressRate': r
+        })
+
+degradation_df = pd.DataFrame(degradation_sim) # create dataframe
+print(degradation_df.head(20)) # sanity check 
+
+# Save degradation data to CSV for analysis on JASP
+degradation_df.to_csv('degradation_output.csv', index=False)
+
+# PLOT SIMULATED CONTINGENCY DEGRADATION DATA
+
+plt.figure(figsize=(10, 10))
+sns.barplot(
+    data=degradation_df, x='Group', y='PressRate',
+    capsize=.1, errorbar='se', color='black'
+)
+
+sns.stripplot(
+    data=degradation_df, x='Group', y='PressRate',
+    jitter=True, alpha=0.6, color='grey', size=5
+)
+plt.title("Contingency Degradation Test")
+plt.ylabel("Presses per Minute")
+plt.xticks(rotation=40)
+plt.tight_layout()
+plt.show()
+
+
+# TWO-WAY ANOVA for Degradation Data
+# Between-subjects factors: Stress and Contingency
+
+# Contingency degradation two-way ANOVA
+# Using Stress and Contingency as separate factors (not Group, which is redundant)
+
+deg_anova = pg.anova(
+    data=degradation_df,
+    dv='PressRate',
+    between=['Stress', 'Contingency']
+)
+
+print(deg_anova)
+
 ```
 
 ### Key analysis
@@ -117,6 +315,23 @@ Any follow-up analyses desired (not required).
 
 Open the discussion section with a paragraph summarizing the primary result from the key analysis and assess whether you successfully reproduced it, partially reproduced it, or failed to reproduce it.  
 
+Giovanniello et al. (2025) report that chronic, mild stress disrupts action-outcome learning and potentiates habit formation, reflected by a Stress x Contingency degradation group interaction F(1,25) = 12.75, p = 0.002. I was able to reproduce this statistical result from the available data, F(1,25) = 12.75, p < 0.002, np2 = 0.34. Using simulated data based on the same group statistics and sample sizes, I observed the interaction, F(1,25) = 34.59, p < 0.001, np2 = 0.81. Although the exact values differed, performance patterns were comparable. The exact values differed due to the normal distribution imposed during the simulation, but the behavioral pattern was consistent with the original. This indicates a successful reproduction of the authors’ argument—stress shifts behavior away from goal-directed control toward habit-like responding. Because of this simulation and low entropy, the effect size I observed is quite large.
+
+
 ### Commentary
 
 Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis of the dataset, (b) assessment of the meaning of the successful or unsuccessful reproducibility attempt - e.g., for a failure to reproduce the original findings, are the differences between original and present analyses ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the reproducibility attempt (if you contacted them).  None of these need to be long.
+
+Although the reproducibility attempt was successful, it is important to consider that there are limitations to simulation-based analyses and that these approaches simplify the biological context. Real animal behavior typically shows heterogeneity driven by motivation, stress exposure variability, reinforcement history, and learning rate differences. Simulating data from normal distributions will reduce noise and inflate effect sizes, overestimating group separability.
+
+Additionally, the real experiment was embedded within a chronic stress protocol that may introduce compounding physiological factors not captured in simulated data. Nonetheless, I was able to reproduce the key finding of stress-induced impairment to adaptive decision-making. This supports the original conclusion and provides confidence in using CeA-DMS circuitry as a target for future investigations, especially in my field, whereby alcohol dependence disrupts motivational control.
+For reproducibility projects, you should also answer the following four questions -- these are for the interpretation/conclusion portion, which otherwise doesn't have the same content as the replication project.
+1. What assumptions does your generative model make about participant behavior, and which aspects of the real experiment does it simplify or omit?
+This simulation project assumes normally distributed behavior within groups, consistent instrumental response acquisition within conditions, and uniform effects of stress. This simulation omits motivational processes, physiological consequences of chronic stress (HPA axis regulation), and learning dynamics that shape the behavioral trajectories (i.e., sustained press rate across days).
+2. Show how your simulated dataset flows through your planned analysis pipeline. Does this recover any mismatches or bugs?
+Upon data simulation, I needed to adjust the columns for different factors in accordance with Python packages to analyze that data. Essentially, each factor needed its own column. The original paper did not have to do this. They used GraphPad Prism in which they could copy and paste their values onto a sheet. My pre-processing resolved bugs when attempting to use analysis packages in Python. My analysis pipeline is aligned with the logic of the original paper, though extra steps were necessary. 
+3. Identify one insight your simulation gave you about the strengths or limitations of the original experimental design.
+This simulation highlighted to me that variability in behavior can control the effect we can observe. Although I used the SDs from the original paper, my simulation was constrained to a normal distribution, causing the interaction effect to be larger. 
+4. How would this simulation help you design a follow-up experiment with a similar paradigm?
+The simulation estimates effect magnitude and variance that can help with experimental design (e.g., power calculation and sample size). It suggests that future experiments need to incorporate individual difference measurements to include variability that is absent in the model. Follow-up experimental designs could incorporate session-level models to assess changes in learning strategy across sessions, and this can improve sensitivity to subtle shifts in goal-directed control.
+
